@@ -8,8 +8,9 @@
   * dict_model.ncl : added scale@IDSRF
   * plot_tr.ncl : draws implied heat transport
   * conf_util.sh : added georun geoctl
-	* diag.sh : runs plot_tr.ncl
-	* html_util.sh : links to heat transport figures
+	* diag.sh : 
+    - runs plot_tr.ncl
+	  - links to heat transport figures
 
 2006-01-19 Takeshi Enomoto <eno@jamstec.go.jp>
 
