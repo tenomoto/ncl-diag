@@ -1,0 +1,48 @@
+1. shell script
+
+  diag.sh:
+    controls execution of plots.
+    creates configuration file (conf.ncl) in the current directory
+    then draws plots based on conf.ncl using ncl.
+
+2. Setting files
+
+  dict_xy.ncl:
+    dictionary for surface plots
+    associates plotid with contour levels, variable names and level
+  dict_yz.ncl:
+    dictionary for lat-pres plots
+    associates plotid with contour levels, variable names and top level
+  dict_ty.ncl
+    dictionary for lat-time plots
+    associates plotid with contour levels, variable names and level
+  dict_obs.ncl:
+    dictionary of obs_varname correspoding to each varname
+  dict_model.ncl
+    dictionary of scale factors corresponding to each model varname
+
+3. Files for I/O
+
+  io_model_grd.ncl
+    defines functions to read a variable from a GrADS file
+  io_model_nc.ncl
+    defines functions to read a variable from a netCDF file
+	io_geo.ncl
+    defines a function to read surface index from geodir from file Grads.ctl
+
+4. ncl scripts for plot 
+
+  plot_xy.ncl:
+    draws contours and vectors in either cylindrical equidistant or
+    polar stereographic projections
+  plot_yz.ncl:
+    draws zonal mean in meridional cross-section
+  plot_ty.ncl
+    draws annual cycle
+  plot_tr.ncl
+    draws annual heat transport
+
+4. steps to create plots and web
+  - Preare monthly means in GrADS or netCDF (one variable per file).
+  - Edit diag.sh. Set directories.
+  - Run the script.

@@ -1,0 +1,46 @@
+2008-04-24 Takeshi Enomoto <eno@jamstec.go.jp>
+
+  * io_obs.ncl : added read_obs_tr()
+  * io_geo_ncl : reads geo file
+  * io_model_grd.ncl : set endians
+  * function_transport.ncl : copied from AMWG Diagnostic Package
+  * dict_obs.ncl : added obs_fillvalue
+  * dict_model.ncl : added scale@IDSRF
+  * plot_tr.ncl : draws implied heat transport
+  * conf_util.sh : added georun geoctl
+	* diag.sh : runs plot_tr.ncl
+
+2006-01-19 Takeshi Enomoto <eno@jamstec.go.jp>
+
+  * plot_yz.ncl : enable to handle the case when some levels in obs are not used
+
+2005-12-22 Takeshi Enomoto <eno@jamstec.go.jp>
+
+  * plot_xy.ncl : fixed vector length for ctl
+  * plot_xy.ncl, diag.sh : use lmin to find temperature min in TTROP
+  * plot_yz.ncl : finds common levels for anomaly
+  * diag.sh : removed redundant links to SLP
+  * diag.sh, io_model.ncl, plot_xy.ncl, plot_ty.ncl, plot_yz.ncl : 
+      merged nc and grd versions. io_model.ncl -> io_model_nc.ncl and io_model_grd.ncl
+  * io_obs.ncl, io_model.ncl, plot_xy.ncl, plot_ty.ncl, plot_yz.ncl : 
+      introduced levfact_model and levfact_obs to deal with Pa and hPa
+  * diag.sh, dict_model.ncl, dict_obs.ncl : added T2 and SST
+
+2005-12-19 Takeshi Enomoto <eno@jamstec.go.jp>
+
+  * io_obs.ncl : read Gaussian weight from gw.nc. (ISCCP data does not contain gw.)
+  * plot_xy.ncl:
+     - use plotid as long name for model runs
+     - logic error at line 88 changed from ".ne." to ".eq."
+                if (plotid.eq."TTRP") then
+     - missing {} when reading ctl for TTRP.
+
+2005-12-16 Takeshi Enomoto <eno@jamstec.go.jp>
+
+  * io_model.ncl: use grads/grads.ncl to read from files in GrADS format
+
+2005-11-16 Takeshi Enomoto <eno@jamstec.go.jp>
+
+  * plot_xy.ncl: use g2gshv() to transform vectors.
+  * diag.sh: changed the default switches to reasonable combinations and device to "x11".
+
