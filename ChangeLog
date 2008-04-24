@@ -9,6 +9,7 @@
   * plot_tr.ncl : draws implied heat transport
   * conf_util.sh : added georun geoctl
 	* diag.sh : runs plot_tr.ncl
+	* html_util.sh : links to heat transport figures
 
 2006-01-19 Takeshi Enomoto <eno@jamstec.go.jp>
 

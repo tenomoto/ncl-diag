@@ -431,6 +431,12 @@ if [[ $LWEB -eq 1 ]]; then
         html_entry "${RUNID}_PRCP_ANC.png" ANC
     html_row_end
 
+    html_dataset "NCEP derived heat transport"
+    html_row_begin "HT"
+      html_entry "{RUNID}_OHT_ANN.png"
+      html_entry "{RUNID}_AHT_ANN.png"
+    html_row_end
+
     html_footer
 
 # convert
