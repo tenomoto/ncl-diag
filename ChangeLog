@@ -1,3 +1,11 @@
+2008-04-28 Takeshi Enomoto <eno@jamstec.go.jp>
+
+  * diag.sh : added RT and FS. See Trenberth 1997
+	* io_model_nc.ncl, io_model_grd.ncl: added calc_model()
+  * io_obs.ncl : added calc_obs_2d()
+	* plot_xy.ncl : replaced read_*() with calc_*()
+  * dict_xy.ncl : added entry for RT and FS
+
 2008-04-24 Takeshi Enomoto <eno@jamstec.go.jp>
 
   * io_obs.ncl : added read_obs_tr()

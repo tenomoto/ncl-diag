@@ -5,6 +5,7 @@ undef("read_obs_2d")
 undef("read_obs_3d")
 undef("read_obs_ty")
 undef("read_obs_tr")
+undef("calc_obs_2d")
 
 levfact_obs = 1
 
@@ -99,3 +100,27 @@ begin
 	aht(2,:) = oht(3,:)            ; OHT
 end
 
+function calc_obs_2d(fname:string,varname:string,obsdir:string,tstr:string)
+local ofname
+begin
+	seasons = (/"ANN", "MAM", "JJA", "SON", "DJF", "MON"/)
+	if (varname.eq."RT") then
+  	ofname = obsdir+"/"+"ERBE_"+tstr+"_climo.nc"
+		rt = read_obs_2d(ofname, "OSR")
+		rt = (/rt-read_obs_2d(ofname, "OLR")/)
+		rt@long_name = "TOA rad flux down"
+		return rt
+	end if
+	if (varname.eq."FS") then
+  	ofname = obsdir+"/"+"ISCCPFD_"+tstr+"_climo.nc"
+		fs = read_obs_2d(ofname, "SSR")
+		fs = (/-fs+read_obs_2d(ofname, "SLR")/)
+  	ofname = obsdir+"/"+"ECMWF_"+tstr+"_climo.nc"
+		fs = (/fs+read_obs_2d(ofname, "EVAP")/)
+  	ofname = obsdir+"/"+"NCEP_"+tstr+"_climo.nc"
+		fs = (/fs+read_obs_2d(ofname, "SENS")/)
+		fs@long_name = "sfc flux up"
+		return fs
+	end if
+	return read_obs_2d(fname,varname)
+end

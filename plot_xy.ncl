@@ -41,9 +41,9 @@ begin
         end if
     end if
     if (l.eq.0) then
-        dtst = read_model(tst_fname, varname, time, lseasonal)
+       	dtst = calc_model(rundir, varname, time, lseasonal)
         dtst@long_name = varname
-        dobs = read_obs_2d(obs_fname, varname)
+        dobs = calc_obs_2d(obs_fname, varname, obsdir, tstr)
         if (lvec) then
             dtst_x = dtst
             dobs_x = dobs
@@ -53,7 +53,7 @@ begin
             dobs@long_name = plotid
         end if
         if (lctl) then
-            dctl = read_model(ctl_fname, varname, time, lseasonal)
+            dctl = calc_model(ctldir, varname, time, lseasonal)
             if (lvec) then
                 dctl_x = dctl
                 dctl_y = read_model(ctl_fname_y, varname_y, time, lseasonal)

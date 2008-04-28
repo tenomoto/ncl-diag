@@ -1,6 +1,7 @@
 load "$DIAGDIR/dict_model.ncl"
 undef("read_model")
 undef("read_model_ty")
+undef("calc_model")
 
 levfact_model = 100
 ext = ".nc"
@@ -80,4 +81,28 @@ begin
 	end do
 	d = scale@$v$ * d
 	return d
+end
+
+function calc_model(datadir:string,varname:string,time:integer,lseasonal:logical)
+begin
+	if (varname.eq."RT") then
+		fname = datadir+"/"+"OSR"+ext
+		rt = read_model(fname, "OSR", time, lseasonal); reads -OSR
+		fname = datadir+"/"+"OLR"+ext
+		rt = (/rt-read_model(fname, "OLR", time, lseasonal)/)
+		return rt
+	end if
+	if (varname.eq."FS") then
+		fname = datadir+"/"+"SSR"+ext
+		fs = read_model(fname, "SSR", time, lseasonal); reads -SSR
+		fname = datadir+"/"+"SLR"+ext
+		fs = (/-fs+read_model(fname, "SLR", time, lseasonal)/)
+		fname = datadir+"/"+"EVAP"+ext
+		fs = (/fs+read_model(fname, "EVAP", time, lseasonal)/)
+		fname = datadir+"/"+"SENS"+ext
+		fs = (/fs+read_model(fname, "SENS", time, lseasonal)/)
+		return fs
+	end if
+	fname = datadir+"/"+varname+ext
+	return read_model(fname, varname, time, lseasonal)
 end
