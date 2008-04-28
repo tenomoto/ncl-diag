@@ -103,6 +103,21 @@ begin
 		fs = (/fs+read_model(fname, "SENS", time, lseasonal)/)
 		return fs
 	end if
+	if (varname.eq."RTFS") then
+		fname = datadir+"/"+"OSR"+ext
+		rtfs = read_model(fname, "OSR", time, lseasonal); reads -OSR
+		fname = datadir+"/"+"OLR"+ext
+		rtfs = (/rtfs-read_model(fname, "OLR", time, lseasonal)/)
+		fname = datadir+"/"+"SSR"+ext
+		rtfs = (/rtfs-read_model(fname, "SSR", time, lseasonal)/); reads -SSR
+		fname = datadir+"/"+"SLR"+ext
+		rtfs = (/rtfs+read_model(fname, "SLR", time, lseasonal)/)
+		fname = datadir+"/"+"EVAP"+ext
+		rtfs = (/rtfs+read_model(fname, "EVAP", time, lseasonal)/)
+		fname = datadir+"/"+"SENS"+ext
+		rtfs = (/rtfs+read_model(fname, "SENS", time, lseasonal)/)
+		return rtfs
+	end if
 	fname = datadir+"/"+varname+ext
 	return read_model(fname, varname, time, lseasonal)
 end

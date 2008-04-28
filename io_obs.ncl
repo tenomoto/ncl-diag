@@ -122,5 +122,19 @@ begin
 		fs@long_name = "sfc flux up"
 		return fs
 	end if
+	if (varname.eq."RTFS") then
+  	ofname = obsdir+"/"+"ERBE_"+tstr+"_climo.nc"
+		rtfs = read_obs_2d(ofname, "OSR")
+		rtfs = (/rtfs-read_obs_2d(ofname, "OLR")/)
+  	ofname = obsdir+"/"+"ISCCPFD_"+tstr+"_climo.nc"
+		rtfs = (/rtfs-read_obs_2d(ofname, "SSR")/)
+		rtfs = (/rtfs+read_obs_2d(ofname, "SLR")/)
+  	ofname = obsdir+"/"+"ECMWF_"+tstr+"_climo.nc"
+		rtfs = (/rtfs+read_obs_2d(ofname, "EVAP")/)
+  	ofname = obsdir+"/"+"NCEP_"+tstr+"_climo.nc"
+		rtfs = (/rtfs+read_obs_2d(ofname, "SENS")/)
+		rtfs@long_name = "residual flux"
+		return rtfs
+	end if
 	return read_obs_2d(fname,varname)
 end
