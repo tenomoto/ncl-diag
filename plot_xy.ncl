@@ -217,6 +217,8 @@ begin
 
     pres = True
     pres@txString = tlabel
+    pres@gsnMaximize = True
+    pres@gsnPaperOrientation = "portrait"
 
 ; draw plots
 

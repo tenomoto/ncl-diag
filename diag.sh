@@ -6,8 +6,8 @@ export DIAGDIR
 echo $DIAGDIR
 
 DEV=pdf
-RUNID=model
-CTLID=
+RUNID=srtm30_403_1982-1987
+CTLID=control_403_1982-1987
 FFMT=grd
 
 # switches
@@ -18,7 +18,7 @@ LPRCP=1
 LLW=1
 LNCEPCE=1
 LNCEPPS=1
-LNCEPVEC=1
+LNCEPVEC=.
 LERBE=1
 LISCCPFD=1
 LCLDAMT=1
@@ -38,7 +38,8 @@ ERA15PSIDS="Z500 U50"
 ERA15CEIDS="TTRP EVAP T850 T200 Z500 Z300 U200"
 LWIDS="T2"
 #NCEPCEIDS="SFCG SENS SLP"
-NCEPCEIDS="SENS SLP"
+#NCEPCEIDS="SENS SLP"
+NCEPCEIDS="SLP"
 NCEPVECIDS="TAUXY UV10"
 ERBEIDS="OSR OLR RT RTFS"
 ISCCPFDIDS="SSRD SLRD SSR SLR FS"
@@ -46,15 +47,15 @@ YZIDS="UYZ TYZ QYZ OMGYZ"
 TYIDS="U200 V200"
 
 # define paths
-RUNDIR=/Volumes/LaCie/diag/$RUNID
-GEORUN=/Volumes/Lacie/research/Models/afes/data/geo/T119
-CTLDIR=/Volumes/LaCie/diag/$CTLID
-GEOCTL=/Volumes/Lacie/research/Models/afes/data/geo/T119
-OBSDIR=/Volumes/LaCie/diag/obs_data
-WEBDIR=/Volumes/LaCie/diag/$RUNID/web
-PDFDIR=/Volumes/LaCie/diag/$RUNID/pdf
+RUNDIR=/Volumes/Quadra2/amip/clim/$RUNID/mean
+GEORUN=/Users/eno/afes/data/geo/T119/f4
+CTLDIR=/Volumes/Quadra2/amip/clim/$CTLID/mean
+GEOCTL=/Users/eno/afes/data/geo/T119/f4
+OBSDIR=/Users/eno/research/obs_data
+WEBDIR=/Users/eno/research/amip/$RUNID/web
+PDFDIR=/Users/eno/research/amip/$RUNID/pdf
 
-NCARG_ROOT=/usr/local/ncl
+NCARG_ROOT=/opt/local
 CONVERT="/opt/local/bin/convert -trim -density 128x128"
 
 # --- do not edit below
@@ -79,13 +80,13 @@ LSEASONAL=True
 # implied heat transports
 
 if [[ $LTR -eq 1 ]]; then
-	DSET=ANNUAL_TRANSPORTS_1985_1989
-	echo $DSET 
-	TIME=$ANN
-	PLOTID=HT
-	echo $PLOTID
-	makeconf
-	$NCL $PLOTTR
+  DSET=ANNUAL_TRANSPORTS_1985_1989
+  echo $DSET 
+  TIME=$ANN
+  PLOTID=HT
+  echo $PLOTID
+  makeconf
+  $NCL $PLOTTR
 fi
 
 # pressure surface plots
@@ -151,7 +152,7 @@ if [[ $LNCEPCE -eq 1 ]]; then
         echo $PLOTID
         for TIME in $ANN $JJA $DJF; do
           makeconf
-              $NCL $PLOTXY > /dev/null 
+          $NCL $PLOTXY > /dev/null 
         done
     done
 fi
